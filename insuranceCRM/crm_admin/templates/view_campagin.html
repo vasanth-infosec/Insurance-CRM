@@ -1,0 +1,87 @@
+{% extends 'admin_base.html' %}
+{% block title %}View Campagin{% endblock %}
+{% block content %}
+{% if messages %}
+<div class="container mt-5">
+    {% for message in messages %}
+
+    {% if message.tags == 'error' %}
+    <div class="alert alert-danger alert-dismissible fade show shadow-sm rounded-3 d-flex align-items-center justify-content-between"
+        role="alert">
+        {% else %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow-sm rounded-3 d-flex row align-items-center justify-content-between"
+            role="alert">
+            {% endif %}
+
+            <div class="flex-grow-1 text-center">
+                {{ message }}
+            </div>
+
+            <button type="button" class="btn-close ms-1" data-bs-dismiss="alert" aria-label="Close">
+            </button>
+
+        </div>
+
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="container">
+        <div class="">
+            <div class="row justify-content-center g-5">
+                <div class="col-xl-12">
+                    <h2 class="fw-bold text-center gold">View Campagin</h2>
+                    {% for data in datas %}
+                    {% empty %}
+                    <div class="alert shadow-sm bg-gray sliver text-center mt-4 fw-bold ">
+                        No Campagin
+                    </div>
+                    {% endfor %}
+                    <div class="table-container">
+                        <table class=" table table-bordered text-center mt-5 align-middle">
+                            <tr class="table-dark">
+                                <th>S.No</th>
+                                <th>Campagin Name</th>
+                                <th>Assigned Agent</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Location</th>
+                                <th>Action</th>
+
+                            </tr>
+                            {% for data in datas %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+
+                                <td>{{data.name}}</td>
+                                <td>
+                                    {% if data.agent.admin %}
+                                    {{ data.agent.admin.first_name }} {{ data.agent.admin.last_name }}
+                                    {% else %}
+                                    Agent Does Not Exist
+                                    {% endif %}
+                                </td>
+                                <td>{{data.date}}</td>
+                                <td>{{data.time}}</td>
+                                <td>{{data.location}}</td>
+                                <td>
+
+                                    <div class="d-flex flex-column">
+                                        <a href="{% url 'edit_campagin' data.id  %}"
+                                            class="btn btn-primary mt-1">Edit</a>
+                                        <a href="{% url 'delete_campagin' data.id %}"
+                                            class="btn btn-danger mt-1">Delete</a>
+                                    </div>
+
+                                </td>
+
+
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

@@ -1,0 +1,134 @@
+.sliver{
+    color: silver !important;
+}
+.gold{
+    color: #FBBF24 !important;
+}
+.bg-sliver{
+    background-color: silver !important;
+}
+.bg-gold{
+    background-color: #FBBF24 !important;
+}
+.bg-gray{
+    background-color: #1E293B !important;
+}
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background: #1F2937;
+    color: silver !important;
+}
+
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 250px;
+    right: 0;
+    height: 60px;
+    z-index: 1000;
+    background-color: #1F2937 !important;
+    color: silver !important;
+}
+
+.main-content {
+    margin-left: 250px;
+    margin-top: 60px;
+    padding: 20px;
+    overflow-y: auto;
+}
+@media (max-width: 991px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .topbar {
+        left: 0;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+}
+
+.dash-box{
+    border-top: 5px solid #FBBF24;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+}
+
+.changep{
+    border: 1px solid white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    color: #D97706;
+    border-radius: 2rem;
+}
+ 
+ 
+.changep input:hover{
+     border: 0.5px solid #FBBF24;
+}
+.changep input:focus{
+     border: 0.5px solid #FBBF24;
+
+}
+ 
+.changep button{
+    background: #FBBF24;
+    color: #1F2937;
+    border-radius: 0.5rem;
+}
+
+.add-client{
+    border: 1px solid white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    color: #D97706;
+    border-radius: 2rem;
+}
+ 
+ 
+.add-client input:hover{
+     border: 0.5px solid #FBBF24;
+}
+.add-client input:focus{
+     border: 0.5px solid #FBBF24;
+
+}
+
+.table-container{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: scroll;
+    scrollbar-width: none;
+    padding-bottom: 2.9rem;
+}
+
+.update-button{
+    color: #1F2937 !important;
+    background-color: #FBBF24 !important;
+}
+
+
+.image{
+    padding: 0.1rem;
+    border: 1px solid #1F2937;
+    color: #1E293B;
+}
+ 
+.add-agent button{
+    background: #FBBF24;
+    color: #1F2937;
+    border-radius: 0.5rem;
+}
+ 

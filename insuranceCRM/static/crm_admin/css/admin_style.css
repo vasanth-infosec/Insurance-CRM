@@ -1,0 +1,125 @@
+.sliver{
+    color: silver !important;
+}
+.gold{
+    color: #FBBF24 !important;
+}
+.bg-sliver{
+    background-color: silver !important;
+}
+.bg-gold{
+    background-color: #FBBF24 !important;
+}
+.bg-gray{
+    background-color: #1E293B !important;
+}
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background: #1F2937;
+    color: silver !important;
+}
+
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 250px;
+    right: 0;
+    height: 60px;
+    z-index: 1000;
+    background-color: #1F2937 !important;
+    color: silver !important;
+}
+
+.main-content {
+    margin-left: 250px;
+    margin-top: 60px;
+    padding: 20px;
+    overflow-y: auto;
+}
+@media (max-width: 991px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .topbar {
+        left: 0;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+}
+
+.add-agent{
+    border: 1px solid white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    color: #D97706;
+    border-radius: 2rem;
+}
+ 
+ 
+.add-agent input:hover{
+     border: 0.5px solid #FBBF24;
+}
+.add-agent input:focus{
+     border: 0.5px solid #FBBF24;
+
+}
+ 
+
+ 
+.add-agent button{
+    background: #FBBF24;
+    color: #1F2937;
+    border-radius: 0.5rem;
+}
+ 
+
+.image{
+    padding: 0.1rem;
+    border: 1px solid #1F2937;
+    color: #1E293B;
+}
+ 
+
+.dash-box{
+    border-top: 5px solid #FBBF24;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+}
+.table-container{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: scroll;
+    scrollbar-width: none;
+    padding-bottom: 2.9rem;
+}
+
+.loading-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loading-box{
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    min-width: 300px;
+}

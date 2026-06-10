@@ -1,0 +1,60 @@
+{% extends 'admin_base.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+{% if messages %}
+<div class="container mt-5">
+    {% for message in messages %}
+
+    {% if message.tags == 'error' %}
+        <div class="alert alert-danger alert-dismissible fade show shadow-sm rounded-3 d-flex align-items-center justify-content-between" role="alert">
+    {% else %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow-sm rounded-3 d-flex row align-items-center justify-content-between" role="alert">
+    {% endif %}
+
+        <div class="flex-grow-1 text-center">
+            {{ message }}
+        </div>
+
+        <button type="button"
+                class="btn-close ms-1"
+                data-bs-dismiss="alert"
+                aria-label="Close">
+        </button>
+
+    </div>
+
+    {% endfor %}
+</div>
+{% endif %}
+<div class="container">
+    <h1 class="text-center fw-bold gold display-4 ">Dashboard</h1>
+    <div class="row justfiy-content-center align-items-center g-3">
+        <div class="col-lg-4 col-md-6 mt-5">
+             <div class="dash-box p-5">
+                    <div class="d-flex flex-column align-items-center justfiy-content-center gap-2 ">
+                        <h3 class="fw-bold">Total Agent</h3>
+                        <h1 class="display-5 fw-bold">{{ta}}</h1>
+                    </div>
+                </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt-5">
+             <div class="dash-box p-5">
+                    <div class="d-flex flex-column align-items-center justfiy-content-center gap-2 ">
+                        <h3 class="fw-bold">Total Campagin</h3>
+                        <h1 class="display-5 fw-bold">{{tc}}</h1>
+                    </div>
+                </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt-5">
+             <div class="dash-box p-5">
+                    <div class="d-flex flex-column align-items-center justfiy-content-center gap-2 ">
+                        <h3 class="fw-bold">Total Clients</h3>
+                        <h1 class="display-5 fw-bold">{{tcl}}</h1>
+                    </div>
+                </div>
+        </div>
+        
+    </div>
+</div>
+</div>
+{% endblock %}

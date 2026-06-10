@@ -1,0 +1,116 @@
+{% extends 'admin_base.html' %}
+{% block title %}View Agent{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="">
+        <div class="row justify-content-center g-5">
+            <div class="col-xl-12">
+                <h2 class="fw-bold text-center gold">View Clients</h2>
+                {% for data in clients %}
+                {% empty %}
+                <div class="alert shadow-sm bg-gray sliver text-center mt-4 fw-bold ">
+                    No Clients
+                </div>
+                {% endfor %}
+                <div class="table-container">
+                    <table class=" table table-bordered text-center mt-5 align-middle">
+                        <tr class="table-dark">
+                            <th>S.No</th>
+                            <th>Client Image</th>
+                            <th>Name</th>
+                            <th>Date of Brith</th>
+                            <th>Phone No</th>
+                            <th>Email</th>
+                            <th>Campagin</th>
+                            <th>Agent Name</th>
+                            <th>More Details</th>
+
+                        </tr>
+                        {% for data in clients %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td><img src="{{data.image.url}}" alt="" width="50px" height="50px" class="img-fluid"></td>
+                            <td>{{data.first_name}} {{data.last_name}}</td>
+                            <td>{{data.dob}}</td>
+                            <td>{{data.mobile_number}}</td>
+                            <td>{{data.email}}</td>
+                            
+                            <td>
+                                {% if data.campagin %}
+                                {{ data.campagin.name }}
+                                {% else %}
+                                Campaign Does Not Exist
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if data.agent.admin %}
+                                {{ data.agent.admin.first_name }} {{ data.agent.admin.last_name }}
+                                {% else %}
+                                Agent Does Not Exist
+                                {% endif %}
+                            </td>
+
+
+                            <td>
+                                <button class="btn btn-info btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#clientModal{{data.id}}">
+                                    View
+                                </button>
+                            </td>
+                        </tr>
+                        <div class="modal fade" id="clientModal{{data.id}}" tabindex="-1">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">
+                                            {{data.first_name}} {{data.last_name}} Details
+                                        </h5>
+
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+
+                                        <p><strong>Aadhaar Number:</strong> {{data.aadhaar_number}}</p>
+
+                                        <p><strong>PAN:</strong> {{data.pan_number}}</p>
+
+                                        <p><strong>Job:</strong> {{data.job}}</p>
+
+                                        <p><strong>Qualification:</strong> {{data.qulification}}</p>
+                                        <p><strong>Married Status : </strong> {{data.married_status}}</p>
+                                        <p><strong>Campaign:</strong> {{data.campagin.name}}</p>
+
+                                        <p><strong>Previous Policy:</strong> {{data.previous_policy}}</p>
+
+                                        <p><strong>Policy Number:</strong> {% if data.data.previous_policy_number %}
+                                            {{data.previous_policy_number}} {% endif %} Policy Number does not Exists
+                                        </p>
+
+                                        <p><strong>Agent Feedback:</strong></p>
+                                        <div class="border rounded p-2">
+                                            {{data.agent_feedback}}
+                                        </div>
+
+                                        <p class="mt-3"><strong>Campaign Feedback:</strong></p>
+                                        <div class="border rounded p-2">
+                                            {{data.campaign_feedback}}
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+<div class="offcanvas offcanvas-start d-lg-none bg-gray" tabindex="-1" id="mobileSidebar">
+
+    <div class="offcanvas-header sliver">
+        <h5>Insurance CRM</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+
+    <div class="offcanvas-body">
+
+        
+     <ul class="nav flex-column px-3">
+        <li><a class="nav-link {% if request.resolver_match.url_name == 'agent_dashboard' %}active gold fw-bold {% endif %} sliver" href="{% url 'agent_dashboard' %}">Dashboard</a></li>
+        <li><a class="nav-link {% if request.resolver_match.url_name == 'view_agent_campagin' %}active gold fw-bold {% endif %} sliver " href="{% url 'view_agent_campagin' %}">View Campagin</a></li>
+        <li><a class="nav-link {% if request.resolver_match.url_name == 'add_client' %}active gold fw-bold {% endif %} sliver " href="{% url 'add_client' %}">Add Client</a></li>
+        <li><a class="nav-link {% if request.resolver_match.url_name == 'view_client' %}active gold fw-bold {% endif %} sliver" href="{% url 'view_client'%}">View Client</a></li>
+    </ul>
+
+    </div>
+
+</div>

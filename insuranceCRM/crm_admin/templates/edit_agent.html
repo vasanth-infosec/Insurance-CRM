@@ -1,0 +1,303 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'crm_admin/css/admin_style.css'%}">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css">
+    <title>Edit Agent</title>
+</head>
+
+<body>
+    {% if messages %}
+    <div class="container mt-5">
+        {% for message in messages %}
+
+        {% if message.tags == 'error' %}
+        <div class="alert alert-danger alert-dismissible fade show shadow-sm rounded-3 d-flex align-items-center justify-content-between"
+            role="alert">
+            {% else %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow-sm rounded-3 d-flex row align-items-center justify-content-between"
+                role="alert">
+                {% endif %}
+
+                <div class="flex-grow-1 text-center">
+                    {{ message }}
+                </div>
+
+                <button type="button" class="btn-close ms-1" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+
+            </div>
+
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="d-flex">
+            {% include 'includes/admin_sidebar.html' %}
+
+            <!-- Main Content -->
+            <div class="flex-grow-1">
+
+                {% include 'includes/admin_navbar.html' %}
+
+            </div>
+
+        </div>
+        <!-- Page Content -->
+        <div class="p-4 main-content">
+            <div class="container ">
+                <div class="">
+
+                    <div class="row justify-content-center">
+                        <div class="col-xl-8 ">
+                            <div class="add-agent px-5 py-4">
+                                <h2 class="text-center fw-bold mb-5 gold">Edit Agent</h2>
+                                <form method="post" action="{% url 'editagent' data.id %}" id="agentEditForm" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="row justify-content-center g-3">
+                                        <div class="text-center">
+                                            <div class="d-flex flex-column gap-4">
+
+                                                <label for="file" class="fw-bold">Profile Image</label>
+                                                <div class="text-center">
+                                                    {% if data.image %}
+                                                    <img src="{{data.image.url}}" width="100" height="100"
+                                                        class="rounded-circle">
+                                                    {% endif %}
+                                                </div>
+                                                <div>
+                                                    <input type="file" name="file" class="image   rounded-3"
+                                                        accept="image/*" id="image" style="width: 50%;">
+                                                    <span id="imageError" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="col-xl-6">
+
+                                            <div class="d-flex flex-column gap-3 ">
+                                                <label for="" class="fw-bold">First Name </label>
+                                                <input type="text" placeholder="Enter the First Name"
+                                                    class="rounded-3 px-3 py-1" id="fname" name="fname"
+                                                    value="{{data.admin.first_name}}" required >
+                                                <span id="fnameError" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <div class="d-flex flex-column gap-3 ">
+                                                <label for="" class="fw-bold">Last Name </label>
+                                                <input type="text" placeholder="Enter the Last Name "
+                                                    class="rounded-3 px-3 py-1" id="lname" name="lname"
+                                                    value="{{data.admin.last_name}}" required>
+                                                <span id="lnameError"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-6">
+                                            <div class="d-flex flex-column gap-3 ">
+
+                                                <label for="" class="fw-bold">Mobile Number </label>
+                                                <input type="tel" placeholder="Enter the Phone Number"
+                                                    class="rounded-3 px-3 py-1" id="phone" name="pnumber"
+                                                    value="{{data.pnumber}}" required>
+                                                <span id="phoneError" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <div class="d-flex flex-column gap-3 ">
+
+                                                <label for="" class="fw-bold">Email </label>
+                                                <input type="email" placeholder="Enter the Email"
+                                                    class="rounded-3 px-3 py-1" id="email" name="email"
+                                                    value="{{data.admin.email}}" required >
+                                                <span id="emailError" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-6">
+                                            <div class="d-flex flex-column gap-3 ">
+                                                <label for="" class="fw-bold">Area of Specialization</label>
+                                                <input type="text" value="{{data.specialization}}"
+                                                    class="rounded-3 px-3 py-1" name="specialization" required >
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <div class="d-flex flex-column gap-3 ">
+                                                <label for="" class="fw-bold">Username</label>
+                                                <input type="text" value="{{data.admin.username}}"
+                                                    class="rounded-3 px-3 py-1" name="username" id="username" required >
+                                                <span id="usernameError" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between mt-3">
+                                            <a href="{% url 'view_agent' %}" class="btn btn-primary fw-bold">back</a>
+                                            <button type="submit" class="btn  fw-bold">Edit</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'includes/mobile_sidebar.html' %}
+
+<script>
+
+            const form = document.getElementById("agentEditForm");
+
+            const email = document.getElementById("email");
+            const phone = document.getElementById("phone");
+            const username = document.getElementById("username");
+
+            const emailError = document.getElementById("emailError");
+            const phoneError = document.getElementById("phoneError");
+            const usernameError = document.getElementById("usernameError");
+
+            let emailValid = true;
+            let phoneValid = true;
+            let usernameValid = true;
+
+            const agentId = "{{ data.admin.id }}";
+
+ 
+
+            // Check Email Exists
+           email.addEventListener("keyup", function(){
+
+             let pattern = /^[a-zA-Z0-9]+@gmail\.com$/;
+
+                if (pattern.test(email.value)) {
+                    emailError.innerHTML = "";
+                    emailValid = true;
+                }
+                else {
+                    emailError.innerHTML = "Enter valid email address";
+                    emailValid = false;
+                    return;
+                }
+
+    fetch(`/edit/agent/data?email=${email.value}&id=${agentId}`)
+    .then(response => response.json())
+    .then(data => {
+
+        if(data.email_exists){
+            emailError.innerHTML = "Email already exists";
+            emailValid = false;
+        }
+        else{
+            emailError.innerHTML = "";
+        }
+
+    });
+
+});
+
+
+// Check Username Exists
+username.addEventListener("keyup", function(){
+
+    
+                let pattern = /^[A-Za-z0-9_]{4,20}$/;
+
+                if (pattern.test(username.value)) {
+                    usernameError.innerHTML = "";
+                    usernameValid = true;
+                }
+                else {
+                    usernameError.innerHTML =
+                        "Username must be 4-20 characters";
+                        usernameValid = false;
+                        return;
+                }
+
+    fetch(`/edit/agent/data?username=${username.value}&id=${agentId}`)
+    .then(response => response.json())
+    .then(data => {
+
+        if(data.username_exists){
+            usernameError.innerHTML = "Username already exists";
+            usernameValid = false;
+        }
+        else{
+            usernameError.innerHTML = "";
+        }
+
+    });
+
+});
+
+
+// Check Phone Exists
+phone.addEventListener("keyup", function(){
+
+    let pattern = /^[6-9][0-9]{9}$/;
+
+                if (pattern.test(phone.value)) {
+                    phoneError.innerHTML = "";
+                    phoneValid = true;
+                }
+                else {
+                    phoneError.innerHTML = "Enter valid 10 digit mobile number";
+                    phoneValid = false;
+                    return;
+                }
+
+    fetch(`/edit/agent/data?phone=${phone.value}&id=${agentId}`)
+    .then(response => response.json())
+    .then(data => {
+
+        if(data.phone_exists){
+            phoneError.innerHTML = "Mobile number already exists";
+            phoneValid = false;
+        }
+        else{
+            phoneError.innerHTML = "";
+        }
+
+    });
+
+});
+
+form.addEventListener("submit", function(e){
+
+    if(
+        !emailValid ||
+        !phoneValid ||
+        !usernameValid ||
+        emailError.innerHTML !== "" ||
+        phoneError.innerHTML !== "" ||
+        usernameError.innerHTML !== ""
+    ){
+        e.preventDefault();
+        alert("Please fix all validation errors before submitting.");
+    }
+
+});
+
+
+</script>
+
+
+
+
+
+</body>
+
+</html>

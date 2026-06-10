@@ -1,0 +1,455 @@
+{% extends 'agent_base.html' %}
+{% block title %}Edit Client{% endblock %}
+{% block content %}
+{% if messages %}
+<div class="container mt-5">
+    {% for message in messages %}
+
+    {% if message.tags == 'error' %}
+        <div class="alert alert-danger alert-dismissible fade show shadow-sm rounded-3 d-flex align-items-center justify-content-between" role="alert">
+    {% else %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow-sm rounded-3 d-flex row align-items-center justify-content-between" role="alert">
+    {% endif %}
+
+        <div class="flex-grow-1 text-center">
+            {{ message }}
+        </div>
+
+        <button type="button"
+                class="btn-close ms-1"
+                data-bs-dismiss="alert"
+                aria-label="Close">
+        </button>
+
+    </div>
+
+    {% endfor %}
+</div>
+{% endif %}
+<div class="container ">
+    <div class="">
+
+        <div class="row justify-content-center">
+            <div class="col-xl-8 ">
+                <div class="add-client px-5 py-4">
+                    <h2 class="text-center fw-bold mb-5 gold">Edit Client</h2>
+                    <form method="post" action="{% url 'editclient' client.id %}" id="ClientForm" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row  g-3">
+
+                            <div class="text-center">
+                                <div class="d-flex flex-column gap-4">
+
+                                    <label for="file" class="fw-bold">Profile Image</label>
+                                    <div class="text-center">
+                                        {% if data.image %}
+                                        <img src="{{client.image.url}}" width="100" height="100" class="rounded-circle">
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        <input type="file" name="file" class="image   rounded-3" accept="image/*"
+                                            id="image" style="width: 50%;">
+                                        <span id="imageError" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="col-xl-6">
+
+                                <div class="d-flex flex-column gap-3 ">
+                                    <label for="" class="fw-bold">First Name </label>
+                                    <input type="text" value="{{client.first_name}}" class="rounded-3 px-3 py-1"
+                                        id="fname" name="fname" required>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="d-flex flex-column gap-3 ">
+                                    <label for="" class="fw-bold">Last Name </label>
+                                    <input type="text" value="{{client.last_name}}" class="rounded-3 px-3 py-1"
+                                        id="lname" name="lname" required>
+                                     
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="d-flex flex-column gap-3 ">
+
+                                    <label for="" class="fw-bold">Data of Birth</label>
+                                    <input type="date" name="dob" value="{{client.dob|date:'Y-m-d'}}"
+                                        class="rounded-3 px-3 py-1 dob-input" id="dob" required>
+                                    <span id="dobError" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+                            <div class="col-xl-6">
+                                <div class="d-flex flex-column gap-3 ">
+
+                                    <label for="" class="fw-bold">Mobile Number </label>
+                                    <input type="tel" value="{{client.mobile_number}}" class="rounded-3 px-3 py-1"
+                                        id="phone" name="pnumber" required>
+                                    <span id="phoneError" class="text-danger"></span>
+                                </div>
+                            </div>
+                             <div class="col-xl-6">
+                                <div class="d-flex flex-column gap-3 ">
+
+                                    <label for="" class="fw-bold">Email </label>
+                                    <input type="email" value="{{client.email}}" class="rounded-3 px-3 py-1" id="email"
+                                        name="email" required>
+                                    <span id="emailError" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6">
+                                <div class="d-flex flex-column gap-3">
+
+                                    <label class="fw-bold">Marital Status</label>
+
+                                    <select name="mstatus" class="rounded-3 px-3 py-1 " required>
+                                        <option value="">Select Marital Status</option>
+                                        <option value="Married" {% if client.married_status == "Married" %}selected{% endif %}> Married</option>
+                                        <option value="Single" {% if client.married_status == "Single" %}selected{% endif  %}>Single</option>
+                                        <option value="Divorced" {% if client.married_status == "Divorced" %}selected{% endif %}>Divorced</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="d-flex flex-column gap-3 ">
+
+                                    <label for="" class="fw-bold">Aadhaar Number </label>
+                                    <input type="tel" value="{{client.aadhaar_number}}" class="rounded-3 px-3 py-1"
+                                        id="anumber" name="anumber" required>
+                                    <span id="anumberError" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="d-flex flex-column gap-3 ">
+
+                                    <label for="" class="fw-bold">PAN Number </label>
+                                    <input type="text" value="{{client.pan_number}}" class="rounded-3 px-3 py-1"
+                                        id="pan" name="pan" required>
+                                    <span id="panError" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="d-flex flex-column gap-3 ">
+
+                                    <label for="" class="fw-bold">Campagins</label>
+                                    <select name="campagin" id="selectctype" class="rounded-3 px-3 py-1" required>
+                                        <option value="">Choose Campagin</option>
+                                        {% for a in campagin %}
+                                        <option value="{{ a.id }}" {% if client.campagin.id == a.id %}selected{% endif %}>
+                                            {{a.name}}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                             <div class="col-xl-6">
+                                    <div class="d-flex flex-column gap-3 ">
+
+                                        <label for="" class="fw-bold">Job </label>
+                                        <input type="tel" value="{{client.job}}" class="rounded-3 px-3 py-1"
+                                            name="job" required>
+
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <div class="d-flex flex-column gap-3 ">
+
+                                        <label for="" class="fw-bold">Qualification </label>
+                                        <input type="tel"  value="{{client.qulification}}"
+                                            class="rounded-3 px-3 py-1" name="qualification" required>
+
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <div class="d-flex flex-column gap-3 mt-2">
+
+                                        <label class="fw-bold">Previous Policy</label>
+
+                                        <div class="d-flex gap-4 ">
+                                            <div>
+                                                <input type="radio" name="ppolicy" id="yes" value="Yes" {% if client.previous_policy == "Yes" %}checked{% endif %}>
+                                                <label for="yes">Yes</label>
+                                            </div>
+
+                                            <div>
+                                                <input type="radio" name="ppolicy" id="no" value="No" {% if client.previous_policy == "No" %}checked{% endif %}>
+                                                <label for="no">No</label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <label class="fw-bold">Choose this Policy?</label>
+                                    <div class="d-flex gap-4 mt-4">
+                                        <div>
+                                            <input type="radio" name="ppsame" id="same_yes" value="Yes" {% if client.same_policy == "Yes" %}checked{% endif %}>
+                                            <label for="same_yes">Yes</label>
+                                        </div>
+
+                                        <div>
+                                            <input type="radio" name="ppsame" id="same_no" value="No" {% if client.same_policy == "No" %}checked{% endif %}>
+                                            <label for="same_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Hidden Fields -->
+                                <div id="policyFields" class="row g-3 mt-2" style="display: none;">
+
+                                    <div class="col-xl-6">
+                                        <div class="d-flex flex-column gap-3 ">
+                                            <label class="fw-bold">Previous Policy Number</label>
+                                            <input type="text" name="ppnumber" value="{{client.previous_policy_number}}" class="form-control">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="d-flex flex-column gap-3 ">
+                                    <label for="" class="fw-bold">Agent Feedback</label>
+                                    <textarea class="rounded-3 py-1 px-3" style="height: 20vh;"
+                                        id="message"
+                                        name="agentf" required>{{client.agent_feedback}}</textarea>
+                                    <span class="text-danger" id="messageError" ></span>
+
+                                </div>
+                                <div class="d-flex flex-column gap-3 ">
+                                    <label for="" class="fw-bold">Campaign Feedback</label>
+                                    <textarea class="rounded-3 py-1 px-3" style="height: 20vh;"
+                                         id="message"
+                                        name="campaginf" required>{{client.campaign_feedback}}</textarea>
+                                    <span class="text-danger" id="messageError" ></span>
+
+                                </div>
+                
+
+
+                            <div class="d-flex justify-content-between">
+                                <a href="{% url 'view_client' %}" class="btn btn-primary fw-bold">back</a>
+                                <button type="submit" class="btn  fw-bold update-button">Update</button>
+                            </div>
+                    </form>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+ <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const yesRadio = document.getElementById("yes");
+            const noRadio = document.getElementById("no");
+            const policyFields = document.getElementById("policyFields");
+
+            yesRadio.addEventListener("change", function () {
+                if (this.checked) {
+                    policyFields.style.display = "flex";
+                }
+            });
+
+            noRadio.addEventListener("change", function () {
+                if (this.checked) {
+                    policyFields.style.display = "none";
+                }
+            });
+
+        });
+
+        const form = document.getElementById("clientForm");
+
+        const dob = document.getElementById("dob");
+        const phone = document.getElementById("phone");
+        const email = document.getElementById("email");
+        const aadhaar = document.getElementById("anumber");
+        const pan = document.getElementById("pan");
+
+        const dobError = document.getElementById("dobError");
+        const phoneError = document.getElementById("phoneError");
+        const emailError = document.getElementById("emailError");
+        const aadhaarError = document.getElementById("anumberError");
+        const panError = document.getElementById("panError");
+
+        let dobValid = false;
+        let phoneValid = false;
+        let emailValid = false;
+        let aadhaarValid = false;
+        let panValid = false;
+
+
+        // DOB  (Age >= 18)
+        dob.addEventListener("input", function () {
+
+            let birthDate = new Date(dob.value);
+            let today = new Date();
+
+            let age = today.getFullYear() - birthDate.getFullYear();
+
+            if (age >= 18) {
+                dobError.innerHTML = "";
+                dobValid = true;
+            } else {
+                dobError.innerHTML = "Client must be at least 18 years old";
+                dobValid = false;
+            }
+
+        });
+
+
+       
+        email.addEventListener("keyup", function () {
+
+            
+
+            let pattern = /^[a-zA-Z0-9]+@gmail\.com$/;
+
+            if (pattern.test(email.value)) {
+                emailError.innerHTML = "";
+                emailValid = true;
+            }
+            else {
+                emailError.innerHTML = "Enter valid email address";
+                emailValid = false;
+                return;
+            }
+            fetch(`/check/edit/client/data?email=${email.value}`)
+                .then(response => response.json())
+                .then(data => {
+
+                    if (data.email_exists) {
+                        emailError.innerHTML = "Email already exists";
+                        emailValid = false;
+                        return;
+
+                    }
+                    else {
+                        emailError.innerHTML = "";
+                    }
+
+                });
+
+        });
+        phone.addEventListener("keyup", function () {
+
+            
+
+            let pattern = /^[6-9][0-9]{9}$/;
+
+            if (pattern.test(phone.value)) {
+                phoneError.innerHTML = "";
+                phoneValid = true;
+            }
+            else {
+                phoneError.innerHTML = "Enter valid 10 digit mobile number";
+                phoneValid = false;
+                return; // Stop here if format is invalid
+            }
+
+            fetch(`/check/edit/client/data?phone=${phone.value}`)
+                .then(response => response.json())
+                .then(data => {
+
+                    if (data.phone_exists) {
+                        phoneError.innerHTML = "Mobile number already exists";
+                        phoneValid = false;
+                    }
+                    else {
+                        phoneError.innerHTML = "";
+                        phoneValid = true;
+                    }
+
+                });
+
+        });
+
+        aadhaar.addEventListener("keyup", function () {
+
+            if (aadhaar.value.trim() === "") {
+                return;
+            }
+            let pattern = /^[2-9][0-9]{11}$/;
+
+            if (pattern.test(aadhaar.value)) {
+                aadhaarError.innerHTML = "";
+                aadhaarValid = true;
+            } else {
+                aadhaarError.innerHTML = "Enter valid 12-digit Aadhaar number";
+                aadhaarValid = false;
+                return;
+            }
+            fetch(`/check/edit/client/data?aadhaar=${aadhaar.value}`)
+                .then(response => response.json())
+                .then(data => {
+
+                    if (data.aadhaar_exists) {
+                        aadhaarError.innerHTML = "Aadhaar already exists";
+                        aadhaarValid = false;
+                    }
+                    else {
+                        aadhaarError.innerHTML = "";
+                    }
+
+                });
+
+        });
+        pan.addEventListener("keyup", function () {
+
+            if (pan.value.trim() === "") {
+                return;
+            }
+             let pattern = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+
+            pan.value = pan.value.toUpperCase();
+
+            if (pattern.test(pan.value)) {
+                panError.innerHTML = "";
+                panValid = true;
+            } else {
+                panError.innerHTML = "Enter valid PAN number";
+                panValid = false;
+            }
+
+            fetch(`/check/edit/client/data?pan=${pan.value}`)
+                .then(response => response.json())
+                .then(data => {
+
+                    if (data.pan_exists) {
+                        panError.innerHTML = "PAN already exists";
+                        panValid = false;
+                    }
+                    else {
+                        panError.innerHTML = "";
+                    }
+
+                });
+
+        });
+        // Form Submit Validation
+        form.addEventListener("submit", function (e) {
+
+            if (
+                !dobValid ||
+                !phoneValid ||
+                !emailValid ||
+                !aadhaarValid ||
+                !panValid ||
+                emailError.innerHTML !== "" ||
+                phoneError.innerHTML !== "" ||
+                aadhaarError.innerHTML !== "" ||
+                panError.innerHTML !== ""
+            ) {
+                e.preventDefault();
+                alert("Please fix all validation errors.");
+            }
+
+        });
+
+
+    </script>
+{% endblock %}

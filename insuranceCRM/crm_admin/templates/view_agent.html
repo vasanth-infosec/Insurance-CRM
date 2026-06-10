@@ -1,0 +1,81 @@
+{% extends 'admin_base.html' %}
+{% block title %}View Agent{% endblock %}
+{% block content %}
+{% if messages %}
+<div class="container mt-5">
+    {% for message in messages %}
+
+    {% if message.tags == 'error' %}
+    <div class="alert alert-danger alert-dismissible fade show shadow-sm rounded-3 d-flex align-items-center justify-content-between"
+        role="alert">
+        {% else %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow-sm rounded-3 d-flex row align-items-center justify-content-between"
+            role="alert">
+            {% endif %}
+
+            <div class="flex-grow-1 text-center">
+                {{ message }}
+            </div>
+
+            <button type="button" class="btn-close ms-1" data-bs-dismiss="alert" aria-label="Close">
+            </button>
+
+        </div>
+
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="container">
+        <div class="">
+
+            <div class="row justify-content-center g-5">
+                <div class="col-xl-12">
+                    <h2 class="fw-bold text-center gold">View Agent</h2>
+                    {% for data in datas %}
+                    {% empty %}
+                    <div class="alert shadow-sm bg-gray sliver text-center mt-4 fw-bold ">
+                        No Agents
+                    </div>
+                    {% endfor %}
+                    <div class="table-container">
+                        <table class=" table table-bordered text-center mt-5 align-middle">
+                            <tr class="table-dark">
+                                <th>S.No</th>
+                                <th>Profile Image</th>
+                                <th>Name</th>
+                                <th>Phone No</th>
+                                <th>Email</th>
+                                <th>Username</th>
+                                <th>Specialization</th>
+                                <th>Action</th>
+
+                            </tr>
+                            {% for data in datas %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td><img src="{{data.image.url}}" alt="" width="35" height="35"
+                                        class="rounded-circle border"></td>
+                                <td>{{data.admin.first_name}} {{data.admin.last_name}}</td>
+                                <td>{{data.pnumber}}</td>
+                                <td>{{data.admin.email}}</td>
+                                <td>{{data.admin.username}}</td>
+                                <td>{{data.specialization}}</td>
+                                <td>
+
+                                    <div class="d-flex flex-column">
+                                        <a href="{% url 'edit_agent' data.id  %}" class="btn btn-primary mt-1">Edit</a>
+                                        <a href="{% url 'delete_agent' data.id %}"
+                                            class="btn btn-danger mt-1">Delete</a>
+                                    </div>
+
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

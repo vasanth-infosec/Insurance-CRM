@@ -1,0 +1,266 @@
+@import url('https://googleapis.com');
+
+*,
+body {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Navbar Starting */
+.nav-bg {
+    background-color: #1F2937;
+
+}
+
+nav,
+a {
+    color: azure !important;
+}
+
+.logo {
+    color: #FBBF24 !important;
+}
+
+.nav-btn {
+    color: white;
+
+}
+
+nav,
+a:hover {
+    color: #FBBF24 !important;
+}
+
+.page-bg {
+    background-color: #F9FAFB;
+}
+
+/* Navbar Ending */
+
+/* footer Starting */
+footer {
+    background-color: #111827;
+    color: #CBD5E1;
+    padding: 3rem;
+    margin-top: 2rem;
+}
+
+footer h5 {
+    color: #FBBF24;
+    font-weight: 600;
+}
+
+footer hr {
+    width: 50px;
+    border: 2px solid #D97706;
+    opacity: 1;
+}
+
+footer a {
+    color: #FFFFFF;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 6px;
+    transition: 0.3s;
+}
+
+footer a:hover {
+    color: #FBBF24;
+    padding-left: 5px;
+}
+
+footer p {
+    color: #D1D5DB;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.copy-right {
+    color: #9CA3AF;
+}
+
+.sub-hed {
+    color: white;
+}
+
+
+/* Footer Ending */
+
+/* Hero Section Staring in Home Page */
+.hero-main-div {
+    background-color: #1F2937;
+}
+
+.hero-sub-div {
+     
+    color: #FBBF24;
+
+}
+
+.hero-sub-div h2 {
+    color: #FBBF24;
+}
+
+span {
+    color: white;
+}
+
+.hero-sub-div p {
+    color: #D1D5DB;
+}
+
+.hero-sub-div a {
+    text-decoration: none;
+
+}
+
+.primary{
+    color: #1F2937 !important;
+    background-color: #FBBF24;
+}
+
+.secondary {
+    border: 1px solid #FBBF24;
+    color: #FBBF24 !important;
+}
+
+/* Hero Section Ending in Home Page  */
+
+/* Why Choose as  starting */
+.choose-main-div {
+    background-color: #F9FAFB;
+}
+
+.choose-main-div h2 {
+    color: #1F2937;
+    font-weight: 400;
+}
+
+.choose-main-div p {
+    color: #6B7280;
+}
+
+.choose-sub-div h5 {
+    color: #111827;
+}
+
+.box {
+    border: 1px solid #E5E7EB;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+
+}
+
+i {
+    color: #FBBF24;
+}
+
+.box:hover {
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
+    border: 1px solid #FBBF24;
+}
+
+/* Why Choose as Ending */
+
+/* insurance service starting  */
+.ins-main-div {
+    background-color: #F9FAFB;
+
+}
+
+.size {
+    height: 100%;
+    border: 1px solid black;
+}
+
+.ins-main-div h2 {
+    color: #1F2937;
+    font-weight: 400;
+}
+
+.ins-main-div p {
+    color: #6B7280;
+}
+
+.ins-sub-div h5 {
+    color: #111827;
+}
+
+/* insurance Service Ending  */
+
+/* Statics Starting  */
+
+.st-main-div {
+    background-color: #F9FAFB;
+}
+
+.st-sub-div {
+    border: 1px soild white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: #1F2937;
+    color: #FBBF24;
+    border-radius: 2rem;
+}
+
+/* Statics Ending */
+
+/* CtA start */
+.cta-main-div {
+     border: 1px soild white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: #1F2937;
+    color: white;
+    border-radius: 2rem;
+}
+
+span{
+    color: #FBBF24;
+}
+.word{
+    color:#1F2937 !important ;
+}
+a{
+    text-decoration: none;
+}
+.view{
+    color: white;
+    border: 1px solid white;
+}
+.icon{
+    color: #FBBF24 !important;
+}
+.primary,.secondary:hover{
+    color: white;
+}
+/* CTA End*/
+
+/* Login Page start */
+
+.login-card{
+     border: 1px solid #1F2937;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    height: 100%;
+    width: 100%;
+    background-color: #1F2937;
+    color: #D97706;
+    border-radius: 2rem;
+}
+.login-card input{
+    background-color: #1F2937 ;
+    border: 1px solid #3b5070;
+    border-radius: 0.2rem;
+    outline: none;
+    color: aliceblue;
+}
+.login-card input:hover{
+     border-color: #FBBF24;
+}
+.login-card input:focus{
+    border-color: #FBBF24;
+}
+.login-card button{
+    background: #FBBF24;
+    border-radius: 0.5rem;
+}
+/* Login Page end */

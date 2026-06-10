@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg  fixed-top py-2   nav-bg">
+  <div class="container-fluid">
+    <h1 class="navbar-brand logo fw-bold  ">Insurance-CRM</h1>
+    <button class="navbar-toggler nav-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <span class="bi bi-list nav-btn"></span>
+    </button>
+    <div class="offcanvas offcanvas-end nav-bg" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title logo fw-bold" id="offcanvasNavbarLabel">Insurance-CRM</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active logo fw-bold {% endif %} text-light"  href="{% url 'home' %}">Home</a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'login' %}active logo fw-bold {% endif %} text-light  " href="{% url 'login' %}">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
